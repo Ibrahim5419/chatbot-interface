@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Responsive Navbar</title>
+</head>
+<style>
+    /* Reset some default styles */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ff9900;
+}
+
+/* Hamburger menu styles (initially hidden on larger screens) */
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.line {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+    transition: transform 0.4s;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide the regular menu */
+        flex-direction: column;
+        text-align: center;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #333;
+    }
+
+    .nav-links.active {
+        display: flex; /* Show the menu when the burger is clicked */
+    }
+
+    .burger {
+        display: flex; /* Show the burger icon */
+    }
+
+    .burger.active .line:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .burger.active .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger.active .line:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+}
+</style>
+<script>
+    // Toggle the mobile menu when the burger icon is clicked
+const burger = document.querySelector(".burger");
+const navLinks = document.querySelector(".nav-links");
+
+burger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    burger.classList.toggle("active");
+});
+
+</script>
+<body>
+    <nav class="navbar">
+        <div class="logo">Logo</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+    <div class="content">
+        <!-- Your page content goes here -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

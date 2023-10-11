@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bufferchat</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 0px;
+        }
+
+
+.chat-container {
+    max-width: 100%;
+    height: 95vh; 
+    padding: 20px;
+    background-color: #1D2C31;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column; 
+}
+        .chat-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #1D2C31;
+            height: 70vh;
+            width: 97%;
+            overflow-y: scroll;
+        }
+        .input {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+            margin: 20px 0px;
+        }
+
+        #message-input {
+            flex: 1; 
+            height: 30px;
+            border-radius: 20px;
+            padding: 0px 20px;
+            font-size: 17px;
+        }
+        #message-input:focus {
+            outline: none;
+        }
+
+        .bx.bx-send {
+            color: #fff;
+            font-size: 28px;
+            padding: 5px;
+        }
+        .bx.bx-x-circle {
+            color: #fff;
+            font-size: 28px;
+        }
+        .message {
+            color: #fff;
+            margin: 20px 0px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            width: 400px;
+            background-color: #00C9B7;
+            font-size: 20px;
+            font-family: sans-serif;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        @media (max-width: 930px) {
+            .chat-container {
+                margin: 30px;
+            }
+        }
+        @media (max-width: 480px) {
+            #message-input {
+                width: 180px;
+            }
+        }
+        .img {
+            height: 50px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="chat-container">
+        <a href="bufferhome.html"><img class="img" src="white_transparent2.png"></a>
+    <div class="input">
+        <input type="text" id="message-input" placeholder="Type a message...">
+        <i id="send" class='bx bx-send' onclick="sendMessage()"></i>
+        <i id="clear" class='bx bx-x-circle' onclick="clearMessages()"></i> 
+    </div>
+    <div class="chat-box" id="chat-box"></div>
+</div>
+<script>
+    const chatBox = document.getElementById("chat-box");
+const messageInput = document.getElementById("message-input");
+
+function sendMessage() {
+    const message = messageInput.value;
+    if (message.trim() === "") {
+        return;
+    }
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "message";
+    messageDiv.textContent = `You: ${message}`;
+    chatBox.appendChild(messageDiv);
+    messageDiv.getBoundingClientRect();
+    messageDiv.style.opacity=1;
+    chatBox.scrollTop = chatBox.scrollHeight;
+    messageInput.value = "";
+}
+
+function clearMessages() {
+    chatBox.innerHTML = "";
+}
+
+document.getElementById("clear").addEventListener("click", clearMessages);
+
+messageInput.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey && event.key === "Backspace") {
+        clearMessages();
+    }
+});
+</script>
+</script>
+</body>
+</html>
